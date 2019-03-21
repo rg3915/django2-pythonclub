@@ -360,7 +360,7 @@ A próxima função (use uma ou outra) renderiza um template, uma página html n
 def home(request):
     return render(request, 'home.html')
 
-A função `band_listing` retorna todas as bandas.
+A função `band_list` retorna todas as bandas.
 
 Para fazer a __busca__ por nome de banda usamos o comando `search = request.GET.get('search_box')`, onde `search_box` é o nome do campo no template __band_list.html__.
 
@@ -507,7 +507,7 @@ Você pode criar os templates com os comandos a seguir...
 
 $ mkdir -p myproject/bands/templates/bands
 $ touch myproject/bands/templates/{menu.html,base.html,home.html}
-$ touch myproject/bands/templates/bands/{band_listing.html,band_contact.html,protected.html}
+$ touch myproject/bands/templates/bands/{band_list.html,band_detail.html,band_form.html,band_contact.html,member_form.html,protected.html}
 
 ... ou pegar os templates já prontos direto do Github.
 
@@ -517,10 +517,12 @@ base.html -P myproject/bands/templates/
 home.html -P myproject/bands/templates/
 menu.html -P myproject/bands/templates/
 
-band_listing.html -P myproject/bands/templates/bands/
 band_contact.html -P myproject/bands/templates/bands/
+band_detail.html
+band_form.html
+band_list.html -P myproject/bands/templates/bands/
+member_form.html
 protected.html -P myproject/bands/templates/bands/
-
 
 CRIAR COMANDOS PARA PEGAR OS TEMPLATES DIRETO DO GITHUB.
 
