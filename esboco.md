@@ -223,23 +223,26 @@ Quit the server with CONTROL-C.
 
 Em `INSTALLED_APPS` acrescente as linhas abaixo.
 
+```
 INSTALLED_APPS = (
     ...
     'widget_tweaks',
     'django_extensions',
     'myproject.bands',
 )
+```
 
 E mude também o idioma.
 
-LANGUAGE_CODE = 'pt-br'
+`LANGUAGE_CODE = 'pt-br'`
 
 E caso você queira o mesmo horário de Brasília-BR
 
-TIME_ZONE = 'America/Sao_Paulo'
+`TIME_ZONE = 'America/Sao_Paulo'`
 
 Já que falamos do python-decouple, precisamos de mais alguns ajustes
 
+```
 from decouple import config, Csv
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -249,19 +252,23 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
+```
 
 Veja que é importante manter sua SECRET_KEY bem guardada (em outro lugar).
 
 Então crie um arquivo `.env` e guarde sua SECRET_KEY dentro dele, exemplo:
 
+```
 SECRET_KEY=your_secret_key
 DEBUG=True
 ALLOWED_HOSTS=127.0.0.1,.localhost
+```
 
 
 ## Editando models.py
 
 
+```
 from django.db import models
 from django.urls import reverse_lazy
 
@@ -313,12 +320,14 @@ class Member(models.Model):
 
     def __str__(self):
         return self.name
+```
 
 
 
 ## Editando urls.py
 
 
+```
 from django.urls import include, path
 from myproject.bands import views as v
 from django.contrib import admin
@@ -336,12 +345,14 @@ urlpatterns = [
     path('accounts/login/', v.message),
     path('admin/', admin.site.urls),
 ]
+```
 
 
 
 
 ## Editando views.py
 
+```
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -349,16 +360,20 @@ from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from .models import Band, Member
 from .forms import BandContactForm
+```
 
 A função a seguir retorna um __HttpResponse__, ou seja, uma mensagem simples no navegador.
 
+```
 def home(request):
     return HttpResponse('Welcome to the site!')
-
+```
 A próxima função (use uma ou outra) renderiza um template, uma página html no navegador.
 
+```
 def home(request):
     return render(request, 'home.html')
+```
 
 A função `band_list` retorna todas as bandas.
 
@@ -366,6 +381,7 @@ Para fazer a __busca__ por nome de banda usamos o comando `search = request.GET.
 
 E os nomes são retornados a partir do comando `bands = bands.filter(name__icontains=search)`. Onde `icontains` procura um texto que contém a palavra, ou seja, você pode digitar o nome incompleto (ignora maiúsculo ou minúsculo).
 
+```
 def band_list(request):
     """ A view of all bands. """
     bands = Band.objects.all()
@@ -373,10 +389,12 @@ def band_list(request):
     if search:
         bands = bands.filter(name__icontains=search)
     return render(request, 'bands/band_list.html', {'bands': bands})
+```
 
 
 A função `band_contact` mostra como tratar um formulário na view.
 
+```
 def band_contact(request):
     """ A example of form """
     if request.method == 'POST':
@@ -384,18 +402,22 @@ def band_contact(request):
     else:
         form = BandContactForm()
     return render(request, 'bands/band_contact.html', {'form': form})
+```
 
 A função `band_detail` retorna todos os membros de cada banda, usando o `pk` da banda junto com o comando `filter` em members.
 
+```
 def band_detail(request, pk):
     """ A view of all members by bands. """
     band = Band.objects.get(pk=pk)
     members = Member.objects.all().filter(band=band)
     context = {'members': members, 'band': band}
     return render(request, 'bands/band_detail.html', context)
+```
 
 `BandForm` e `MemberForm usam o [Class Based View]() para tratar formulário de uma forma mais simplificada usando a classe `CreateView`. O `reverse_lazy` serve para tratar a url de retorno de página.
 
+```
 class BandForm(CreateView):
     template_name = 'bands/band_form.html'
     model = Band
@@ -406,45 +428,54 @@ class MemberForm(CreateView):
     template_name = 'bands/member_form.html'
     model = Member
     success_url = reverse_lazy('bands')
+```
 
 A próxima função requer que você entre numa página somente quando estiver logado.
 
-[@login_required]() é um __decorator__.
+`[@login_required]()` é um __decorator__.
 
 `login_url='/accounts/login/'` é página de erro, ou seja, quando o usuário não conseguiu logar.
 
 E `render(request, 'bands/protected.html',...` é página de sucesso.
 
+```
 @login_required(login_url='/accounts/login/')
 def protected_view(request):
     """ A view that can only be accessed by logged-in users """
     return render(request, 'bands/protected.html', {'current_user': request.user})
+```
 
 `HttpResponse` retorna uma mensagem simples no navegador sem a necessidade de um template.
 
+```
 def message(request):
     """ Message if is not authenticated. Simple view! """
     return HttpResponse('Access denied!')
+```
 
 
 
 ## Comandos básicos do manage.py
 
+
 Para criar novas migrações com base nas alterações feitas nos seus modelos
 
-$ python manage.py makemigrations bands
+`$ python manage.py makemigrations bands`
+
 
 Para aplicar as migrações
 
-$ python manage.py migrate
+`$ python manage.py migrate`
+
 
 Para criar um usuário e senha para o admin
 
-$ python manage.py createsuperuser
+`$ python manage.py createsuperuser`
+
 
 Para rodar a aplicação localmente
 
-$ python manage.py runserver
+`$ python manage.py runserver`
 
 
 
@@ -454,15 +485,16 @@ $ python manage.py runserver
 
 Com o comando a seguir abrimos o shell do Django.
 
-$ python manage.py shell
+`$ python manage.py shell`
 
 Mas se você está usando o django-extensions (mostrei como configurá-lo no settings.py), então basta digitar
 
-$ python manage.py shell_plus
+`$ python manage.py shell_plus`
 
 
 Veja a seguir como inserir dados direto pelo shell.
 
+```
 >>> from myproject.bands.models import Band, Member
 >>> # Com django-extensions não precisa fazer o import
 >>> # criando o objeto e salvando
@@ -497,6 +529,7 @@ Veja a seguir como inserir dados direto pelo shell.
 >>> Band.objects.all()
 >>> Member.objects.all()
 >>> exit()
+```
 
 
 
@@ -505,12 +538,15 @@ Veja a seguir como inserir dados direto pelo shell.
 
 Você pode criar os templates com os comandos a seguir...
 
+```
 $ mkdir -p myproject/bands/templates/bands
 $ touch myproject/bands/templates/{menu.html,base.html,home.html}
 $ touch myproject/bands/templates/bands/{band_list.html,band_detail.html,band_form.html,band_contact.html,member_form.html,protected.html}
+```
 
 ... ou pegar os templates já prontos direto do Github.
 
+```
 wget https://raw.githubusercontent.com/rg3915/django1.7/master/myproject/bands/templates/base.html -P myproject/bands/templates/
 
 base.html -P myproject/bands/templates/
@@ -523,6 +559,7 @@ band_form.html
 band_list.html -P myproject/bands/templates/bands/
 member_form.html
 protected.html -P myproject/bands/templates/bands/
+```
 
 CRIAR COMANDOS PARA PEGAR OS TEMPLATES DIRETO DO GITHUB.
 
@@ -532,10 +569,11 @@ TODO: EXPLICAR ALGUNS TEMPLATES....
 
 ## forms.py
 
-$ touch myproject/bands/forms.py
+`$ touch myproject/bands/forms.py`
 
 Edite o forms.py.
 
+```
 from django import forms
 from .models import Band, Member
 
@@ -558,12 +596,14 @@ class MemberForm(forms.ModelForm):
     class Meta:
         model = Member
         fields = '__all__'
+```
 
 
 ## admin.py
 
 Criamos uma customização para o admin onde em members aparece um filtro por bandas.
 
+```
 from django.contrib import admin
 from .models import Band, Member
 
@@ -576,6 +616,7 @@ class MemberAdmin(admin.ModelAdmin):
 
 admin.site.register(Band)  # Use the default options
 admin.site.register(Member, MemberAdmin)  # Use the customized options
+```
 
 
 ## Carregando dados de um CSV
