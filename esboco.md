@@ -75,7 +75,7 @@ source .venv/bin/activate
 Basta digitar
 
 ```
-pip install django==2.1.7
+pip install django==2.2
 ```
 
 Dica: se você digitar `pip freeze` você verá a versão dos programas instalados.
@@ -106,10 +106,9 @@ Este é o resultado do meu até o dia deste post:
 
 ```
 (.venv):$ cat requirements.txt 
-Django==2.1.7
+
 django-extensions==2.1.6
 django-widget-tweaks==1.4.3
-pkg-resources==0.0.0
 python-decouple==3.1
 pytz==2018.9
 six==1.12.0

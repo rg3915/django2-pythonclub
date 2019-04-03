@@ -1,7 +1,6 @@
-Django==2.1.7
+Django==2.2
 django-extensions==2.1.6
 django-widget-tweaks==1.4.3
-pkg-resources==0.0.0
 python-decouple==3.1
 pytz==2018.9
 six==1.12.0
