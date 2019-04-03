@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from .models import Band, Member
-from .forms import BandContactForm
+from .forms import BandContactForm, BandForm, MemberForm
 
 
 def home(request):
@@ -37,15 +37,17 @@ def band_detail(request, pk):
     return render(request, 'bands/band_detail.html', context)
 
 
-class BandForm(CreateView):
-    template_name = 'bands/band_form.html'
+class BandCreate(CreateView):
     model = Band
+    form_class = BandForm
+    template_name = 'bands/band_form.html'
     success_url = reverse_lazy('bands')
 
 
-class MemberForm(CreateView):
-    template_name = 'bands/member_form.html'
+class MemberCreate(CreateView):
     model = Member
+    form_class = MemberForm
+    template_name = 'bands/member_form.html'
     success_url = reverse_lazy('bands')
 
 

@@ -288,7 +288,7 @@ class Band(models.Model):
 
     def get_absolute_url(self):
         # retorna a url no formato /bands/1/
-        return reverse_lazy('bands:band_detail', kwargs={'pk': self.pk})
+        return reverse_lazy('band_detail', kwargs={'pk': self.pk})
 
     def get_members_count(self):
         # count members by band
@@ -337,8 +337,8 @@ urlpatterns = [
     path('', v.home, name='home'),
     path('bands/', v.band_list, name='bands'),
     path('bands/<int:pk>/', v.band_detail, name='band_detail'),
-    path('bandform/', v.BandForm.as_view(), name='band_form'),
-    path('memberform/', v.MemberForm.as_view(), name='member_form'),
+    path('bandform/', v.BandCreate.as_view(), name='band_form'),
+    path('memberform/', v.MemberCreate.as_view(), name='member_form'),
     path('contact/', v.band_contact, name='contact'),
     path('protected/', v.protected_view, name='protected'),
     path('accounts/login/', v.message),
@@ -358,7 +358,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from .models import Band, Member
-from .forms import BandContactForm
+from .forms import BandContactForm, BandForm, MemberForm
 ```
 
 A função a seguir retorna um __HttpResponse__, ou seja, uma mensagem simples no navegador.
@@ -414,18 +414,20 @@ def band_detail(request, pk):
     return render(request, 'bands/band_detail.html', context)
 ```
 
-`BandForm` e `MemberForm usam o [Class Based View]() para tratar formulário de uma forma mais simplificada usando a classe `CreateView`. O `reverse_lazy` serve para tratar a url de retorno de página.
+`BandCreate` e `MemberCreate usam o [Class Based View]() para tratar formulário de uma forma mais simplificada usando a classe `CreateView`. O `reverse_lazy` serve para tratar a url de retorno de página.
 
 ```
-class BandForm(CreateView):
-    template_name = 'bands/band_form.html'
+class BandCreate(CreateView):
     model = Band
+    form_class = BandForm
+    template_name = 'bands/band_form.html'
     success_url = reverse_lazy('bands')
 
 
-class MemberForm(CreateView):
-    template_name = 'bands/member_form.html'
+class MemberCreate(CreateView):
     model = Member
+    form_class = MemberForm
+    template_name = 'bands/member_form.html'
     success_url = reverse_lazy('bands')
 ```
 
@@ -553,7 +555,7 @@ home.html -P myproject/bands/templates/
 menu.html -P myproject/bands/templates/
 
 band_contact.html -P myproject/bands/templates/bands/
-band_detail.html
+* OK band_detail.html
 band_form.html
 band_list.html -P myproject/bands/templates/bands/
 member_form.html
