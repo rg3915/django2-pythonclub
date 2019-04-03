@@ -554,12 +554,12 @@ base.html -P myproject/bands/templates/
 home.html -P myproject/bands/templates/
 menu.html -P myproject/bands/templates/
 
-band_contact.html -P myproject/bands/templates/bands/
+* OK band_contact.html -P myproject/bands/templates/bands/
 * OK band_detail.html
-band_form.html
-band_list.html -P myproject/bands/templates/bands/
-member_form.html
-protected.html -P myproject/bands/templates/bands/
+* OK band_form.html
+* OK band_list.html -P myproject/bands/templates/bands/
+* OK member_form.html
+* OK protected.html -P myproject/bands/templates/bands/
 ```
 
 CRIAR COMANDOS PARA PEGAR OS TEMPLATES DIRETO DO GITHUB.
