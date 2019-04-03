@@ -18,7 +18,7 @@ class Band(models.Model):
 
     def get_absolute_url(self):
         # retorna a url no formato /bands/1/
-        return reverse_lazy('bands:band_detail', kwargs={'pk': self.pk})
+        return reverse_lazy('band_detail', kwargs={'pk': self.pk})
 
     def get_members_count(self):
         # count members by band

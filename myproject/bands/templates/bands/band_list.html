@@ -16,7 +16,7 @@
         <ul class="list-group">
           <li class="list-group-item">
             <span class="badge">{{ band.get_members_count }}</span>
-            <h4><a href="{{ band.get_band_detail_url }}">{{ band.name }}</a></h4>
+            <h4><a href="{{ band.get_absolute_url }}">{{ band.name }}</a></h4>
             {% if band.can_rock %}
                 <p>This band can rock!</p>
             {% endif %}
