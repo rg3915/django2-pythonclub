@@ -15,6 +15,7 @@ class BandForm(forms.ModelForm):
         model = Band
         fields = '__all__'
 
+
 class MemberForm(forms.ModelForm):
 
     class Meta:
