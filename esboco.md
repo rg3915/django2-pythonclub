@@ -548,18 +548,15 @@ $ touch myproject/bands/templates/bands/{band_list.html,band_detail.html,band_fo
 ... ou pegar os templates já prontos direto do Github.
 
 ```
-wget https://raw.githubusercontent.com/rg3915/django1.7/master/myproject/bands/templates/base.html -P myproject/bands/templates/
-
-base.html -P myproject/bands/templates/
-home.html -P myproject/bands/templates/
-menu.html -P myproject/bands/templates/
-
-* OK band_contact.html -P myproject/bands/templates/bands/
-* OK band_detail.html
-* OK band_form.html
-* OK band_list.html -P myproject/bands/templates/bands/
-* OK member_form.html
-* OK protected.html -P myproject/bands/templates/bands/
+wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/myproject/bands/templates/base.html -P myproject/bands/templates/
+wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/myproject/bands/templates/home.html -P myproject/bands/templates/
+wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/myproject/bands/templates/menu.html -P myproject/bands/templates/
+wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/myproject/bands/templates/bands/band_contact.html -P myproject/bands/templates/bands/
+wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/myproject/bands/templates/bands/band_detail.html -P myproject/bands/templates/bands/
+wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/myproject/bands/templates/bands/band_form.html -P myproject/bands/templates/bands/
+wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/myproject/bands/templates/bands/band_list.html -P myproject/bands/templates/bands/
+wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/myproject/bands/templates/bands/member_form.html -P myproject/bands/templates/bands/
+wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/myproject/bands/templates/bands/protected.html -P myproject/bands/templates/bands/
 ```
 
 CRIAR COMANDOS PARA PEGAR OS TEMPLATES DIRETO DO GITHUB.
