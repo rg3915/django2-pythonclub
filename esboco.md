@@ -1,4 +1,4 @@
-# Tutorial Django 2.1.x
+# Tutorial Django 2.2
 
 
 
@@ -9,7 +9,7 @@ https://github.com/rg3915/django2-pythonclub
 
 Este tutorial é baseado no **Intro to Django** que fica na parte de baixo da página [start](https://www.djangoproject.com/start/) do Django project.
 
-Até a data deste post o Django está na versão 2.1.7, e requer Python 3.
+Até a data deste post o Django está na versão 2.2, e requer Python 3.
 
 
 ## O que você precisa?
@@ -70,7 +70,7 @@ source .venv/bin/activate
 ```
 
 
-## Instalando Django 2.1.7
+## Instalando Django 2.2
 
 Basta digitar
 
@@ -211,7 +211,7 @@ $ python manage.py runserver
 e veja que a aplicação já está funcionando. Veja o endereço da url aqui
 
 ```
-Django version 2.1.7, using settings 'myproject.settings'
+Django version 2.2, using settings 'myproject.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
