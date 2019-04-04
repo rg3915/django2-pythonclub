@@ -559,9 +559,6 @@ wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/myprojec
 wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/myproject/bands/templates/bands/protected.html -P myproject/bands/templates/bands/
 ```
 
-CRIAR COMANDOS PARA PEGAR OS TEMPLATES DIRETO DO GITHUB.
-
-TODO: EXPLICAR ALGUNS TEMPLATES....
 
 
 
