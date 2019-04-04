@@ -623,7 +623,14 @@ admin.site.register(Member, MemberAdmin)  # Use the customized options
 
 ## Carregando dados de um CSV
 
+Estando na pasta principal, rode o comando
 
+```
+python create_data.py
+```
 
----
+que ele vai carregar alguns dados pra você.
+
+Veja o código de [create_data.py].
+
 
