@@ -17,7 +17,7 @@ def csv_to_list(filename: str) -> list:
     https://bit.ly/2FLDHsH
     '''
     with open(filename) as csv_file:
-        reader = csv.DictReader(csv_file, delimiter=';')
+        reader = csv.DictReader(csv_file)
         csv_data = [line for line in reader]
     return csv_data
 
