@@ -506,6 +506,8 @@ Para criar novas migrações com base nas alterações feitas nos seus modelos
 
 `$ python manage.py makemigrations bands`
 
+Obs: talvez dê erro porque está faltando coisas de forms.py, explicado mais abaixo.
+
 
 Para aplicar as migrações
 
@@ -516,11 +518,13 @@ Para criar um usuário e senha para o admin
 
 `$ python manage.py createsuperuser`
 
-
 Para rodar a aplicação localmente
 
 `$ python manage.py runserver`
 
+Após criar um super usuário você pode entrar em localhost:8000/admin
+
+Obs: Se você entrar agora em localhost:8000 vai faltar o template home.html. Explicado mais abaixo.
 
 
 ## shell_plus
