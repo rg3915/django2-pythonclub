@@ -406,7 +406,7 @@ Em urls.py pode descomentar a linha a seguir:
 path('bands/', v.band_list, name='bands'),
 ```
 
-A função `band_contact` mostra como tratar um formulário na view.
+A função `band_contact` mostra como tratar um formulário na view. Esta função requer `BandContactForm`, explicado em forms.py.
 
 ```
 def band_contact(request):
@@ -442,6 +442,8 @@ path('bands/<int:pk>/', v.band_detail, name='band_detail'),
 ```
 
 `BandCreate` e `MemberCreate usam o [Class Based View]() para tratar formulário de uma forma mais simplificada usando a classe `CreateView`. O `reverse_lazy` serve para tratar a url de retorno de página.
+
+As classes a seguir requerem `BandForm` e `MemberForm`, explicado em forms.py.
 
 ```
 class BandCreate(CreateView):
