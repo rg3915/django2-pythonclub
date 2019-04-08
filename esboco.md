@@ -321,6 +321,14 @@ class Member(models.Model):
         return self.name
 ```
 
+Tem algumas coisas que eu não estou explicando aqui para o tutorial ficar curto, mas uma coisa importante é que, como nós editamos o models.py vamos precisar criar um arquivo de migração do novo modelo. Para isso digite
+
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+
+O primeiro comando cria o arquivo de migração e o segundo o executa, criando as tabelas no banco de dados.
 
 
 ## Editando urls.py
@@ -358,8 +366,10 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from .models import Band, Member
-from .forms import BandContactForm, BandForm, MemberForm
+# from .forms import BandContactForm, BandForm, MemberForm
 ```
+
+Obs: Deixei a última linha comentada porque ainda não chegamos em forms.
 
 A função a seguir retorna um __HttpResponse__, ou seja, uma mensagem simples no navegador.
 
@@ -548,6 +558,7 @@ $ touch myproject/bands/templates/bands/{band_list.html,band_detail.html,band_fo
 ... ou pegar os templates já prontos direto do Github.
 
 ```
+mkdir -p myproject/bands/templates/bands
 wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/myproject/bands/templates/base.html -P myproject/bands/templates/
 wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/myproject/bands/templates/home.html -P myproject/bands/templates/
 wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/myproject/bands/templates/menu.html -P myproject/bands/templates/
@@ -594,6 +605,14 @@ class MemberForm(forms.ModelForm):
         fields = '__all__'
 ```
 
+Lembra que eu deixei o código comentado em views.py?
+
+Descomente ele por favor
+
+```
+from .forms import BandContactForm, BandForm, MemberForm
+```
+
 
 ## admin.py
 
@@ -617,6 +636,15 @@ admin.site.register(Member, MemberAdmin)  # Use the customized options
 
 ## Carregando dados de um CSV
 
+Vamos baixar alguns arquivos para criar os dados no banco a partir de um CSV.
+
+```
+wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/create_data.py
+mkdir fix
+wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/fix/bands.csv -P fix/
+wget https://raw.githubusercontent.com/rg3915/django2-pythonclub/master/fix/members.csv -P fix/
+```
+
 Estando na pasta principal, rode o comando
 
 ```
@@ -625,6 +653,6 @@ python create_data.py
 
 que ele vai carregar alguns dados pra você.
 
-Veja o código de [create_data.py].
+Veja o código de [create_data.py](https://github.com/rg3915/django2-pythonclub/blob/master/create_data.py).
 
 
