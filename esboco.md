@@ -343,18 +343,18 @@ app_name = 'bands'
 
 urlpatterns = [
     path('', v.home, name='home'),
-    path('bands/', v.band_list, name='bands'),
-    path('bands/<int:pk>/', v.band_detail, name='band_detail'),
-    path('bandform/', v.BandCreate.as_view(), name='band_form'),
-    path('memberform/', v.MemberCreate.as_view(), name='member_form'),
-    path('contact/', v.band_contact, name='contact'),
-    path('protected/', v.protected_view, name='protected'),
-    path('accounts/login/', v.message),
+    # path('bands/', v.band_list, name='bands'),
+    # path('bands/<int:pk>/', v.band_detail, name='band_detail'),
+    # path('bandform/', v.BandCreate.as_view(), name='band_form'),
+    # path('memberform/', v.MemberCreate.as_view(), name='member_form'),
+    # path('contact/', v.band_contact, name='contact'),
+    # path('protected/', v.protected_view, name='protected'),
+    # path('accounts/login/', v.message),
     path('admin/', admin.site.urls),
 ]
 ```
 
-
+Obs: deixei as demais urls comentada porque precisa da função em views.py para que cada url funcione. Descomente cada url somente depois que você tiver definido a função em classe em views.py a seguir.
 
 
 ## Editando views.py
@@ -400,6 +400,11 @@ def band_list(request):
     return render(request, 'bands/band_list.html', {'bands': bands})
 ```
 
+Em urls.py pode descomentar a linha a seguir:
+
+```
+path('bands/', v.band_list, name='bands'),
+```
 
 A função `band_contact` mostra como tratar um formulário na view.
 
@@ -413,6 +418,12 @@ def band_contact(request):
     return render(request, 'bands/band_contact.html', {'form': form})
 ```
 
+Em urls.py pode descomentar a linha a seguir:
+
+```
+path('contact/', v.band_contact, name='contact'),
+```
+
 A função `band_detail` retorna todos os membros de cada banda, usando o `pk` da banda junto com o comando `filter` em members.
 
 ```
@@ -422,6 +433,12 @@ def band_detail(request, pk):
     members = Member.objects.all().filter(band=band)
     context = {'members': members, 'band': band}
     return render(request, 'bands/band_detail.html', context)
+```
+
+Em urls.py pode descomentar a linha a seguir:
+
+```
+path('bands/<int:pk>/', v.band_detail, name='band_detail'),
 ```
 
 `BandCreate` e `MemberCreate usam o [Class Based View]() para tratar formulário de uma forma mais simplificada usando a classe `CreateView`. O `reverse_lazy` serve para tratar a url de retorno de página.
@@ -440,6 +457,14 @@ class MemberCreate(CreateView):
     template_name = 'bands/member_form.html'
     success_url = reverse_lazy('bands')
 ```
+
+Em urls.py pode descomentar a linha a seguir:
+
+```
+path('bandform/', v.BandCreate.as_view(), name='band_form'),
+path('memberform/', v.MemberCreate.as_view(), name='member_form'),
+```
+
 
 A próxima função requer que você entre numa página somente quando estiver logado.
 
@@ -464,6 +489,12 @@ def message(request):
     return HttpResponse('Access denied!')
 ```
 
+Em urls.py pode descomentar a linha a seguir:
+
+```
+path('protected/', v.protected_view, name='protected'),
+path('accounts/login/', v.message),
+```
 
 
 ## Comandos básicos do manage.py
